@@ -1,0 +1,173 @@
+SQL> SELECT * FROM writers;
+
+  WRITERID                                                                      
+----------                                                                      
+NAME                                                                            
+--------------------------------------------------------------------------------
+NATIONALITY                                                                     
+--------------------------------------------------                              
+         1                                                                      
+William Shakespeare                                                             
+British                                                                         
+                                                                                
+         2                                                                      
+Leo Tolstoy                                                                     
+Russian                                                                         
+
+  WRITERID                                                                      
+----------                                                                      
+NAME                                                                            
+--------------------------------------------------------------------------------
+NATIONALITY                                                                     
+--------------------------------------------------                              
+                                                                                
+         3                                                                      
+Jane Austen                                                                     
+British                                                                         
+                                                                                
+         4                                                                      
+Mark Twain                                                                      
+
+  WRITERID                                                                      
+----------                                                                      
+NAME                                                                            
+--------------------------------------------------------------------------------
+NATIONALITY                                                                     
+--------------------------------------------------                              
+American                                                                        
+                                                                                
+         5                                                                      
+Gabriel García Márquez                                                          
+Colombian                                                                       
+                                                                                
+
+SQL> SELECT * FROM novel;
+
+   NOVELID                                                                      
+----------                                                                      
+TITLE                                                                           
+--------------------------------------------------------------------------------
+GENRE                                                WRITERID                   
+-------------------------------------------------- ----------                   
+         1                                                                      
+Hamlet                                                                          
+Tragedy                                                     1                   
+                                                                                
+         2                                                                      
+War and Peace                                                                   
+Historical Fiction                                          2                   
+
+   NOVELID                                                                      
+----------                                                                      
+TITLE                                                                           
+--------------------------------------------------------------------------------
+GENRE                                                WRITERID                   
+-------------------------------------------------- ----------                   
+                                                                                
+         3                                                                      
+Pride and Prejudice                                                             
+Romance                                                     3                   
+                                                                                
+         4                                                                      
+The Adventures of Tom Sawyer                                                    
+
+   NOVELID                                                                      
+----------                                                                      
+TITLE                                                                           
+--------------------------------------------------------------------------------
+GENRE                                                WRITERID                   
+-------------------------------------------------- ----------                   
+Adventure                                                   4                   
+                                                                                
+         5                                                                      
+One Hundred Years of Solitude                                                   
+Magic Realism                                               5                   
+                                                                                
+
+SQL> SELECT * FROM borrows;
+
+  BORROWID    NOVELID                                                           
+---------- ----------                                                           
+BORROWERNAME                                                                    
+--------------------------------------------------------------------------------
+BORROWDAT RETURNDAT                                                             
+--------- ---------                                                             
+         1          1                                                           
+Alice Johnson                                                                   
+01-JUN-25 15-JUN-25                                                             
+                                                                                
+         2          3                                                           
+Bob Smith                                                                       
+05-JUN-25                                                                       
+
+  BORROWID    NOVELID                                                           
+---------- ----------                                                           
+BORROWERNAME                                                                    
+--------------------------------------------------------------------------------
+BORROWDAT RETURNDAT                                                             
+--------- ---------                                                             
+                                                                                
+         3          2                                                           
+Charlie Davis                                                                   
+20-MAY-25 01-JUN-25                                                             
+                                                                                
+         4          5                                                           
+Diana Clark                                                                     
+
+  BORROWID    NOVELID                                                           
+---------- ----------                                                           
+BORROWERNAME                                                                    
+--------------------------------------------------------------------------------
+BORROWDAT RETURNDAT                                                             
+--------- ---------                                                             
+10-JUN-25                                                                       
+                                                                                
+         5          4                                                           
+Ethan Wright                                                                    
+25-MAY-25 05-JUN-25                                                             
+                                                                                
+
+SQL> SELECT * FROM writers;
+
+  WRITERID                                                                      
+----------                                                                      
+NAME                                                                            
+--------------------------------------------------------------------------------
+NATIONALITY                                                                     
+--------------------------------------------------                              
+         1                                                                      
+William Shakespeare                                                             
+British                                                                         
+                                                                                
+         2                                                                      
+Leo Tolstoy                                                                     
+Russian                                                                         
+
+  WRITERID                                                                      
+----------                                                                      
+NAME                                                                            
+--------------------------------------------------------------------------------
+NATIONALITY                                                                     
+--------------------------------------------------                              
+                                                                                
+         3                                                                      
+Jane Austen                                                                     
+British                                                                         
+                                                                                
+         4                                                                      
+Mark Twain                                                                      
+
+  WRITERID                                                                      
+----------                                                                      
+NAME                                                                            
+--------------------------------------------------------------------------------
+NATIONALITY                                                                     
+--------------------------------------------------                              
+American                                                                        
+                                                                                
+         5                                                                      
+Gabriel García Márquez                                                          
+Colombian                                                                       
+                                                                                
+
+SQL> SPOOL OFF
