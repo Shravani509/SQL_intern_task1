@@ -1,0 +1,105 @@
+SPOOL C:\Users\SHRAVANI\Documents\output.txt;
+
+## Writer tables
+-- Create sequence with correct name
+CREATE SEQUENCE writer_seq START WITH 1 INCREMENT BY 1;
+
+-- Create the table
+CREATE TABLE writers (
+    WriterID INT PRIMARY KEY,
+    Name VARCHAR2(100),
+    Nationality VARCHAR2(50)
+);
+
+-- Create trigger using correct sequence name and proper ending
+CREATE OR REPLACE TRIGGER trg_writers_id
+BEFORE INSERT ON writers
+FOR EACH ROW
+BEGIN
+    SELECT writer_seq.NEXTVAL INTO :NEW.WriterID FROM dual;
+END;
+
+
+INSERT INTO writers (WriterID, Name, Nationality) VALUES (1,'William Shakespeare', 'British');
+INSERT INTO writers (WriterID, Name, Nationality) VALUES (2,'Leo Tolstoy', 'Russian');
+INSERT INTO writers (WriterID, Name, Nationality) VALUES (3,'Jane Austen', 'British');
+INSERT INTO writers (WriterID, Name, Nationality) VALUES (4,'Mark Twain', 'American');
+INSERT INTO writers (WriterID, Name, Nationality) VALUES (5,'Gabriel García Márquez', 'Colombian');
+
+SELECT * FROM writers;
+
+
+-- Sequence for NovelID
+CREATE SEQUENCE novel_seq START WITH 1 INCREMENT BY 1;
+
+-- Table for novels
+CREATE TABLE novel (
+    NovelID INT PRIMARY KEY,
+    Title VARCHAR2(100),
+    Genre VARCHAR2(50),
+    WriterID INT,
+    CONSTRAINT fk_writer FOREIGN KEY (WriterID) REFERENCES writers(WriterID)
+);
+
+-- Trigger to auto-increment NovelID
+CREATE OR REPLACE TRIGGER trg_novel_id
+BEFORE INSERT ON novel
+FOR EACH ROW
+BEGIN
+    SELECT novel_seq.NEXTVAL INTO :NEW.NovelID FROM dual;
+END;
+/
+
+
+-- Sequence for BorrowID
+CREATE SEQUENCE borrow_sequence START WITH 1 INCREMENT BY 1;
+
+-- Table for borrow records
+CREATE TABLE borrows (
+    BorrowID INT PRIMARY KEY,
+    NovelID INT,
+    BorrowerName VARCHAR2(100),
+    BorrowDate DATE,
+    ReturnDate DATE,
+    CONSTRAINT fk_novel FOREIGN KEY (NovelID) REFERENCES novel(NovelID)
+);
+
+DROP TRIGGER trg_borrow_id;
+
+-- Then recreate it on your current table
+CREATE OR REPLACE TRIGGER trg_borrow_id
+BEFORE INSERT ON borrows
+FOR EACH ROW
+BEGIN
+    SELECT borrow_seq.NEXTVAL INTO :NEW.BorrowID FROM dual;
+END;
+/
+
+INSERT INTO novel (Title, Genre, WriterID) VALUES('Hamlet', 'Tragedy', 1)
+INSERT INTO novel (Title, Genre, WriterID) VALUES('War and Peace', 'Historical Fiction', 2)
+INSERT INTO novel (Title, Genre, WriterID) VALUES('Pride and Prejudice', 'Romance', 3)
+INSERT INTO novel (Title, Genre, WriterID) VALUES('The Adventures of Tom Sawyer', 'Adventure', 4)
+INSERT INTO novel (Title, Genre, WriterID) VALUES('One Hundred Years of Solitude', 'Magic Realism', 5);
+
+INSERT INTO borrows (NovelID, BorrowerName, BorrowDate, ReturnDate) VALUES
+(1, 'Alice Johnson', TO_DATE('2025-06-01', 'YYYY-MM-DD'), TO_DATE('2025-06-15', 'YYYY-MM-DD'));
+INSERT INTO borrows (NovelID, BorrowerName, BorrowDate, ReturnDate) VALUES
+(3, 'Bob Smith', TO_DATE('2025-06-05', 'YYYY-MM-DD'), NULL);
+INSERT INTO borrows (NovelID, BorrowerName, BorrowDate, ReturnDate) VALUES
+(2, 'Charlie Davis', TO_DATE('2025-05-20', 'YYYY-MM-DD'), TO_DATE('2025-06-01', 'YYYY-MM-DD'));
+INSERT INTO borrows (NovelID, BorrowerName, BorrowDate, ReturnDate) VALUES
+(5, 'Diana Clark', TO_DATE('2025-06-10', 'YYYY-MM-DD'), NULL);
+INSERT INTO borrows (NovelID, BorrowerName, BorrowDate, ReturnDate) VALUES
+(4, 'Ethan Wright', TO_DATE('2025-05-25', 'YYYY-MM-DD'), TO_DATE('2025-06-05', 'YYYY-MM-DD'));
+
+
+-- View all writers
+SELECT * FROM writers;
+
+-- View all novels
+SELECT * FROM novel;
+
+-- View all borrow records
+SELECT * FROM borrows;
+
+SPOOL OFF
